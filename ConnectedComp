@@ -1,0 +1,44 @@
+class Solution {
+
+    public ArrayList<ArrayList<Integer>> getComponents(int V, int[][] edges) {
+        //adjancency LIST 
+        ArrayList<ArrayList<Integer> adj = new ArrayList<>();
+        for(int i= 0; i<V;i++){
+            adj.add(new ArrayList<>());
+           }
+//edges connected
+ for(int i=0; i<edges.length;i++){
+    int u = edges[i][0];
+    int v = edges[i][1];
+    adj.get(u).add(v);
+    adj.get(v).add(u);
+ }
+
+ boolean vis [] = new boolean[V];
+ ArrayList<ArrayList<Integer> components = new ArrayList<>();
+ 
+
+ //find connected components
+  for(int i=0;i<V;i++){
+    if(!vis[i]){
+        ArrayList<Integer>comp = new ArrayList<>();
+        dfs(i,adj,vis,comp);
+        components.add(comp);
+    }
+    }
+
+  return components;
+}
+ // DFS helper
+    private void dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] vis, ArrayList<Integer> comp) {
+         vis[node] =true;
+         comp.add(node);
+         for(int i=0;i<adj.get(node).size();i++){
+            int nei = adj.get(node).get();
+            if(!vis[nei]){
+                dfs(nei,adj,vis,comp);
+            }
+         }
+        }
+    }
+
